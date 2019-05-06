@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>NLP 分类练习</title>
+<meta charset="UTF-8">
+
+<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="/static/css/font-awesome.min.css">
+<link rel="stylesheet" href="/static/css/b.tabs.css" type="text/css">
+<style type="text/css">
+div.menuSideBar { }
+div.menuSideBar li.nav-header { font-size: 14px; padding: 3px 15px; }
+div.menuSideBar .nav-list > li > a, div.menuSideBar .dropdown-menu li a { -webkit-border-radius: 0px; -moz-border-radius: 0px; -ms-border-radius: 0px; border-radius: 0px; }
+.login-register {
+    margin-left: 3%;
+}
+</style>
+
+</head>
+<body>
+<header class="login-register">
+    <a href="/login/">登录</a>
+    <a href="/register/">注册</a>
+</header>
+<div class="content">
+<div class="container">
+<h3 class="page-header">使用标签页打开页面模式，允许多开</h3>
+<div class="">
+  <div class="row-fluid">
+    <div class="col-md-2" style="padding-left: 0px;">
+      <div class="well menuSideBar" style="padding: 8px 0px;">
+        <ul class="nav nav-list" id="menuSideBar">
+          <li class="nav-header">导航菜单</li>
+          <li class="nav-divider"></li>
+          <li mid="tab1" funurl="html.html"><a tabindex="-1" href="javascript:void(0);">MultinomialNB</a></li>
+          <li mid="tab2" funurl="html2.html"><a tabindex="-1" href="javascript:void(0);">MultinomialNB-Score</a></li>
+          <li mid="tab3" funurl="html3.html"><a tabindex="-1" href="javascript:void(0);">LinearRegression</a></li>
+          <li mid="tab4" funurl="html4.html"><a tabindex="-1" href="javascript:void(0);">逻辑回归和朴素贝叶斯</a></li>
+          <li mid="tab5" funurl="html5.html"><a tabindex="-1" href="javascript:void(0);">SVM高斯核函数对鸢尾花数据进行分类</a></li>
+          <li mid="tab6" funurl="html6.html"><a tabindex="-1" href="javascript:void(0);">SVM对不平衡样本的处理</a></li>
+          <li mid="tab7" funurl="html7.html"><a tabindex="-1" href="javascript:void(0);">kmeans对数据四组数据进行分类</a></li>
+          <li mid="tab8" funurl="html8.html"><a tabindex="-1" href="javascript:void(0);">svm高斯核函数对新闻分类</a></li>
+          <li mid="tab9" funurl="html9.html"><a tabindex="-1" href="javascript:void(0);">对近期复仇者联盟4的猫眼评价进行分类</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-10" id="mainFrameTabs" style="padding : 0px;"> 
+      
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active noclose"><a href="#bTabs_navTabsMainPage" data-toggle="tab">首页</a></li>
+      </ul>
+      
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div class="tab-pane active" id="bTabs_navTabsMainPage">
+          <div class="page-header">
+            <h2 style="font-size: 31.5px;text-align: center;font-weight: normal;">欢迎使用</h2>
+          </div>
+          <div style="text-align: center;font-size: 20px;line-height: 20px;">
+              <span>使用说明</span>
+              <hr>
+              <span>页面1：多项式朴素贝叶斯
+                  <br>
+                    因为语料比较少，只有体育、财经、军事、文化这四个分类
+                  <br>
+              </span>
+              <hr>
+              <span>pass</span>
+              <hr>
+              <span>pass</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/js/b.tabs.js" ></script>
+<script type="text/javascript" src="/static/js/demo.js" ></script>
+
+<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+{#<p>适用浏览器：360、FireFox、Chrome、Safari、Opera、傲游、搜狗、世界之窗. 不支持IE8及以下浏览器。</p>#}
+{#<p>来源：<a href="http://sc.chinaz.com/" target="_blank">站长素材</a></p>#}
+</div>
+</body>
+</html>

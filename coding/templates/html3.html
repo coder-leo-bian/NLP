@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="/static/js/jquery-3.3.1.min.js"></script>
+    <style>
+        .upfile {
+            width: 80%;
+            height: 30px;
+
+        }
+
+        .confirmfile {
+            background-color: #5bc0de;
+            font-size: 15px;
+            margin-left: 5%;
+        }
+
+        #submit_button {
+            border-left: 200px;
+        }
+    </style>
+
+    <script>
+        $(function () {
+            $('#submit_button').on("click", function () {
+                var mychar = document.getElementById("submit_button");
+                mychar.style.display="none";
+                $.ajax({
+                    url: "/submit3/",
+                    type: "POST",
+                    data: new FormData($('#upload_form')[0]),    // 获取json的数据格式
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    success: function (arg) {
+                        alert('success');
+                        alert(arg)
+                        // $('#img').attr("src", "../static/images/Linear.jpg");
+                        b(arg);
+                    }
+                });
+
+            })
+        });
+
+        function b(arg) {
+            var d0 = $("#d0");
+            var d1 = $("#d1");
+            var d2 = $("#d2");
+            var d3 = $("#d3");
+            var tableData = ''
+            var t0 = ''
+            var t1 = ''
+            var t2 = ''
+            var t3 = ''
+            var a = JSON.parse(arg)
+            t0 = '<tr>' + '<td>'+ ' ' + '</td>' + '<td>' + '平均绝对值误差'+ '</td>' + '<td>'+ '       均方差 ' +'</td>' + '<td>'+ '  中值绝对误差 ' +'</td>' + '<td>'+ '  R2 决定系数（拟合优度)   ' +'</td>' + '</tr>'
+            t1 = '<tr>' + '<td>'+ 'Linear' + '</td>' + '<td>'+ a.linear_score.linear_absolute + '</td>' + '<td>'+ a.linear_score.linear_squared +'</td>' + '<td>'+ a.linear_score.linear_median + '</td>' + '<td>'+ a.linear_score.linear_r2 +'</td>' + '</tr>'
+            t2 = '<tr>' + '<td>'+ 'Ridge' + '</td>' + '<td>'+ a.ridge_score.ridge_absolute + '</td>' + '<td>'+ a.ridge_score.ridge_squared +'</td>' + '<td>'+ a.ridge_score.ridge_median + '</td>' + '<td>'+ a.ridge_score.ridge_r2 +'</td>' + '</tr>'
+            t3 = '<tr>' + '<td>'+ 'Lasso' + '</td>' + '<td>'+ a.lasso_score.lasso_absolute + '</td>' + '<td>'+ a.lasso_score.lasso_squared +'</td>' + '<td>'+ a.lasso_score.lasso_median + '</td>' + '<td>'+ a.lasso_score.lasso_r2 +'</td>' + '</tr>'
+            tableData = '<table>' + t0 + t1+ t2 + t3 + '</table>'
+            d1.html("<img src='../static/images/Linear.png?t=" + Date.parse(new Date()) + "'>");
+            d2.html("<img src='../static/images/Ridge.png?t=" + Date.parse(new Date()) + "'>");
+            d3.html("<img src='../static/images/Lasso.png?t=" + Date.parse(new Date()) + "'>");
+            d0.html(tableData)
+        }
+
+
+    </script>
+</head>
+<body>
+
+<div class="page-header">
+    <h1>LinearRegression学习</h1>
+</div>
+<div>
+    <form action="/submit3" method="post" id="upload_form">
+        <div>
+            <p>a值(x系数)：<input class="upfile" type="text" name="a_value" placeholder="自变量x的系数"></p>
+            <p>b值(x截距)：<input class="upfile" type="text" name="b_intercept" placeholder="截距b的值"></p>
+        </div>
+        <div>
+            <p>扰动上线：<input class="upfile" type="text" name="up_error" placeholder="扰动上线"></p>
+            <p>扰动下线：<input class="upfile" type="text" name="down_erroe" placeholder="扰动下线"></p>
+        </div>
+        <!--<input class="confirmfile" type="button" id="submit_button" value="确认上传">-->
+        <input class="confirmfile" type="button" value="确认上传" id="submit_button">
+    </form>
+
+    <form action="/updatapage3" method="post">
+        <input class="confirmfile" type="submit" value="刷新" id="submit_button">
+    </form>
+
+</div>
+
+<hr>
+<div>
+    <h4>通过自定义直线方程来画出回归线：y = ax + b + error(随机扰动值)</h4>
+
+    <hr>
+
+    <caption><h1 id="hhhhh">状态表</h1></caption>
+    <div id="d0"></div>
+
+    <div id="d1"></div>
+    <div id="d2"></div>
+    <div id="d3"></div>
+    <!--<input id='img' type="image">-->
+    </table>
+
+
+</div>
+</body>
+</html>

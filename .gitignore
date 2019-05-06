@@ -1,0 +1,7 @@
+*.log
+*.pyc
+coding/static/uploads/
+*.jpg
+/.idea/*
+*.png
+pickles/

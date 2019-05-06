@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="/static/js/jquery-3.3.1.min.js"></script>
+    <style>
+        .upfile {
+            width: 80%;
+            height: 30px;
+
+        }
+
+        .confirmfile {
+            background-color: #5bc0de;
+            font-size: 15px;
+            margin-left: 5%;
+        }
+        #submit_button {
+            border-left: 200px;
+        }
+    </style>
+
+    <script>
+         $(function (){$('#submit_button').on("click", function () {
+                var mychar=document.getElementById("submit_button");
+                // mychar.style.display="none";
+                $.ajax({
+                    url: "/submit/",
+                    type: "POST",
+                    {#data:form,#}
+                    data: new FormData($('#upload_form')[0]),    // 获取json的数据格式
+                    cache: false,
+                    processData:false,
+                    contentType: false,
+                    success: function (arg) {
+                        alert(arg)
+                    }
+                })
+            })});
+    </script>
+</head>
+<body>
+
+<div class="page-header">
+    <h1>使用MultinomialNB对新闻分类</h1>
+</div>
+<div>
+    <form action="/submit" METHOD="post" id="upload_form">
+        <div>
+            <p>新闻内容：<input class="upfile" type="text" name="news_content" placeholder="新闻内容"></p>
+        </div>
+        <!--<input class="confirmfile" type="button" id="submit_button" value="确认上传">-->
+        <input class="confirmfile" type="button" id="submit_button" value="确认上传">
+    </form>
+
+    <form action="/againtrain" METHOD="post">
+        <input class="confirmfile" type="submit" value="重新训练">
+    </form>
+</div>
+
+<hr>
+<div>
+    <!--<caption><h1>状态表</h1></caption>-->
+    <!--<table border="3" width="80%" height="80" id="table_update" bordercolor="cornflowerblue">-->
+
+        <!--<br/>-->
+        <!--<tr align="center">-->
+
+            <!--<td colspan="8">项目</td>-->
+
+        <!--</tr>-->
+
+        <!--<tr align="center" bgcolor="pink">-->
+            <!--<th>中文名</th>-->
+            <!--<th>英文名</th>-->
+            <!--<th>邮箱</th>-->
+            <!--<th>发送状态</th>-->
+        <!--</tr>-->
+
+    <!--</table>-->
+
+</div>
+</body>
+</html>

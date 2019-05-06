@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="/static/js/jquery-3.3.1.min.js"></script>
+    <style>
+        .upfile {
+            width: 80%;
+            height: 30px;
+
+        }
+
+        .confirmfile {
+            background-color: #5bc0de;
+            font-size: 15px;
+            margin-left: 5%;
+        }
+        #submit_button {
+            border-left: 200px;
+        }
+        #h3 {
+            display: none;
+        }
+    </style>
+
+    <script>
+         $(function (){$('#submit_button').on("click", function () {
+                var mychar=document.getElementById("submit_button");
+                var h3=document.getElementById("h3");
+                mychar.style.display="none";
+                h3.style.display="block";
+                $.ajax({
+                    url: "/submit8/",
+                    type: "POST",
+                    {#data:form,#}
+                    data: new FormData($('#upload_form')[0]),    // 获取json的数据格式
+                    cache: false,
+                    processData:false,
+                    contentType: false,
+                    success: function (arg) {
+                        alert(arg)
+                    }
+                })
+            })});
+    </script>
+</head>
+<body>
+
+<div class="page-header">
+    <h2>使用SVM高斯核函数对新闻分类</h2>
+</div>
+<div>
+    <form action="/submit8" METHOD="post" id="upload_form">
+        <div>
+            <p>新闻内容：<input class="upfile" type="text" name="news_content" placeholder="新闻内容"></p>
+        </div>
+        <!--<input class="confirmfile" type="button" id="submit_button" value="确认上传">-->
+        <input class="confirmfile" type="button" id="submit_button" value="确认上传">
+        <h3 id="h3">加载中......</h3>
+    </form>
+
+    <form action="/againtrain8" METHOD="post">
+        <input class="confirmfile" type="submit" value="重新训练">
+    </form>
+
+    <form action="/updatapage8" METHOD="post">
+        <input class="confirmfile" type="submit" value="刷新">
+    </form>
+</div>
+
+<hr>
+<div>
+    <h4>用来训练的语料分为：culture, financial, military, sports 每个样本各100个</h4>
+
+    <hr>
+    {% if score %}
+    <caption><h1>状态表</h1></caption>
+    <table border="3" width="80%" height="80" id="table_update" bordercolor="cornflowerblue">
+
+        <br/>
+        <tr align="center">
+
+            <td colspan="8">项目</td>
+
+        </tr>
+
+        <tr align="center" bgcolor="#6495ed">
+            <td>查准率</td>
+            <td>{{ score.precision_weighted }}</td>
+        </tr>
+        <tr align="center" bgcolor="#6495ed">
+            <td>召回率</td>
+            <td>{{ score.recall_weighted }}</td>
+        </tr>
+        <tr align="center" bgcolor="#6495ed">
+            <td>F1得分</td>
+            <td>{{ score.f1_weighted }}</td>
+        </tr>
+        <tr align="center" bgcolor="#6495ed">
+            <td>测试正确数量</td>
+            <td>{{ true_count }}</td>
+        </tr>
+        <tr align="center" bgcolor="#6495ed">
+            <td>测试总数量</td>
+            <td>{{ all_count }}</td>
+        </tr>
+        <tr align="center" bgcolor="#6495ed">
+            <td>正确率</td>
+            <td>{{ true_score }}</td>
+        </tr>
+    </table>
+    {% endif %}
+
+</div>
+</body>
+</html>

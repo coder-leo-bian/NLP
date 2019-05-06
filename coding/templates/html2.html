@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="/static/js/jquery-3.3.1.min.js"></script>
+    <style>
+        .upfile {
+            width: 80%;
+            height: 30px;
+
+        }
+
+        .confirmfile {
+            background-color: #5bc0de;
+            font-size: 15px;
+            margin-left: 5%;
+        }
+        #submit2_button {
+            border-left: 200px;
+        }
+    </style>
+
+    <script>
+         $(function (){$('#submit2_button').on("click", function () {
+                var mychar=document.getElementById("submit2_button");
+                // mychar.style.display="none";
+                $.ajax({
+                    url: "/submit2/",
+                    type: "POST",
+                    {#data:form,#}
+                    data: new FormData($('#upload_form')[0]),    // 获取json的数据格式
+                    cache: false,
+                    processData:false,
+                    contentType: false,
+                    success: function (arg) {
+                        alert(arg)
+                    }
+                })
+            })});
+    </script>
+</head>
+<body>
+
+<div class="page-header">
+    <h1>使用MultinomialNB对新闻分类</h1>
+</div>
+<div>
+    <form action="/submit2" METHOD="post" id="upload_form">
+        <div>
+            <p>新闻内容：<input class="upfile" type="file" name="news_file" placeholder="新闻内容"></p>
+        </div>
+        <!--<input class="confirmfile" type="button" id="submit_button" value="确认上传">-->
+        <input class="confirmfile" type="button" id="submit2_button" value="确认上传">
+    </form>
+
+    <form action="/againtrain2" METHOD="post">
+        <input class="confirmfile" type="submit" value="重新训练">
+    </form>
+</div>
+
+<hr>
+<div>
+    <h4>用来训练的语料分为：culture, financial, military, sports 每个样本各500个</h4>
+
+    <hr>
+    {% if score %}
+    <caption><h1>状态表</h1></caption>
+    <table border="3" width="80%" height="80" id="table_update" bordercolor="cornflowerblue">
+
+        <br/>
+        <tr align="center">
+
+            <td colspan="8">项目</td>
+
+        </tr>
+
+        <tr align="center" bgcolor="#6495ed">
+            <td>查准率</td>
+            <td>{{ score.precision_weighted }}</td>
+        </tr>
+        <tr align="center" bgcolor="#6495ed">
+            <td>召回率</td>
+            <td>{{ score.recall_weighted }}</td>
+        </tr>
+        <tr align="center" bgcolor="#6495ed">
+            <td>F1得分</td>
+            <td>{{ score.f1_weighted }}</td>
+        </tr>
+        <tr align="center" bgcolor="#6495ed">
+            <td>测试正确数量</td>
+            <td>{{ true_count }}</td>
+        </tr>
+        <tr align="center" bgcolor="#6495ed">
+            <td>测试总数量</td>
+            <td>{{ all_count }}</td>
+        </tr>
+        <tr align="center" bgcolor="#6495ed">
+            <td>正确率</td>
+            <td>{{ true_score }}</td>
+        </tr>
+    </table>
+    {% endif %}
+
+</div>
+</body>
+</html>

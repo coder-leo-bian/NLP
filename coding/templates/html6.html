@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="/static/js/jquery-3.3.1.min.js"></script>
+    <style>
+        .upfile {
+            width: 80%;
+            height: 30px;
+
+        }
+
+        .confirmfile {
+            background-color: #5bc0de;
+            font-size: 15px;
+            margin-left: 5%;
+        }
+
+        #submit_button {
+            border-left: 200px;
+        }
+        #h1 {
+            display: none;
+            color: #d43f3a;
+        }
+    </style>
+
+    <script>
+        $(function () {
+            $('#submit_button').on("click", function () {
+                var mychar = document.getElementById("submit_button");
+                var h1 = document.getElementById("h1");
+                mychar.style.display="none";
+                h1.style.display="block";
+                $.ajax({
+                    url: "/submit6/",
+                    type: "POST",
+                    data: new FormData($('#upload_form')[0]),    // 获取json的数据格式
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    success: function (arg) {
+                        h1.style.display="none";
+                        // $('#img').attr("src", "../static/images/Linear.jpg");
+                        b(arg);
+                    }
+                });
+
+            })
+        });
+
+        function b(arg) {
+            var d1 = $("#d1");
+            d1.html("<img src='../static/images/SCV_unbalance.png?t=" + Date.parse(new Date()) + "'>");
+        }
+
+
+    </script>
+</head>
+<body>
+
+<div class="page-header">
+    <h1>svm对不平衡样本的处理</h1>
+</div>
+<div>
+    <form action="/submit6" method="post" id="upload_form">
+        <input class="confirmfile" type="button" value="开始训练" id="submit_button">
+        <h1 id="h1">加载中...</h1>
+    </form>
+
+    <form action="/updatapage6" method="post">
+        <input class="confirmfile" type="submit" value="刷新">
+    </form>
+
+</div>
+
+<hr>
+<div>
+    <h4>svm多不平衡样本的处理</h4>
+    <div>
+        <span>
+            样本点生成：x1 = 3*np.random.randn(990, 2) <br> x2 = 0.5*np.random.randn(10, 2) + (4, 4) <br>
+            一共1000个样点，前990：-1，后10：1
+        </span>
+    </div>
+    <div id="d2"></div>
+    <hr>
+
+    <caption><h1 id="hhhhh">图形可视化</h1></caption>
+    <div id="d1"></div>
+    <hr>
+    <!--<input id='img' type="image">-->
+    </table>
+
+
+</div>
+</body>
+</html>
