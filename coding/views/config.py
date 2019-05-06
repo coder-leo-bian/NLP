@@ -30,4 +30,6 @@ APP_FILM_CV_TXT = os.path.join(APP_ROOT, '../../pickles/film_comment_multinomiaN
 APP_FILM_MODEL_TXT = os.path.join(APP_ROOT, '../../pickles/film_comment_multinomiaNB_model')
 APP_FILM_TF_TXT = os.path.join(APP_ROOT, '../../pickles/film_comment_multinomiaNB_tf')
 
+APP_COMMENT_JSON_TXT = os.path.join(APP_ROOT, '../../data/maoyan/comment.json')
+
 

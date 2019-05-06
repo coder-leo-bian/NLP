@@ -1,5 +1,6 @@
 import numpy as np
 import json
+from . import config
 
 """欧几里得推荐引擎"""
 
@@ -12,7 +13,7 @@ class EuclideanEngine(object):
     @classmethod
     def get_movie(cls):
         # 获取json文档
-        with open('../../data/maoyan/comment.json', 'r') as f:
+        with open(config.APP_COMMENT_JSON_TXT, 'r') as f:
             data = json.loads(f.read())
         return data
 
@@ -46,8 +47,9 @@ class EuclideanEngine(object):
         data = cls.get_movie()
         users, scmap = cls.compute_relation(data)
         print(users)
-        for scrow in scmap:
-            print(' '.join("{:>5.2f}".format(s) for s in scrow))
+
+        for index, scrow in enumerate(scmap):
+            print( users[index] + ' '.join("{:>5.2f}".format(s) for s in scrow))
 
 EuclideanEngine().train_main()
 
